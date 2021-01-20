@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "projects": {
+    "weather-alert": {
+      "projectType": "application",
+      "root": "apps/weather-alert",
+      "sourceRoot": "apps/weather-alert/src",
+      "prefix": "credi-nord",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/weather-alert",
+            "index": "apps/weather-alert/src/index.html",
+            "main": "apps/weather-alert/src/main.ts",
+            "polyfills": "apps/weather-alert/src/polyfills.ts",
+            "tsConfig": "apps/weather-alert/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/weather-alert/src/favicon.ico",
+              "apps/weather-alert/src/assets"
+            ],
+            "styles": ["apps/weather-alert/src/styles.styl"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/weather-alert/src/environments/environment.ts",
+                  "with": "apps/weather-alert/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "weather-alert:build",
+            "proxyConfig": "apps/weather-alert/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "weather-alert:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "weather-alert:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/weather-alert/src/**/*.ts",
+              "apps/weather-alert/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/weather-alert"],
+          "options": {
+            "jestConfig": "apps/weather-alert/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "weather-alert-e2e": {
+      "root": "apps/weather-alert-e2e",
+      "sourceRoot": "apps/weather-alert-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/weather-alert-e2e/cypress.json",
+            "tsConfig": "apps/weather-alert-e2e/tsconfig.e2e.json",
+            "devServerTarget": "weather-alert:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "weather-alert:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/weather-alert-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "prefix": "api",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": ["apps/api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api"],
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-interfaces": {
+      "root": "libs/api-interfaces",
+      "sourceRoot": "libs/api-interfaces/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "styl"
+    }
+  },
+  "defaultProject": "weather-alert"
+}
