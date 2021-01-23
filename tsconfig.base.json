@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@credi-nord/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@credi-nord/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@credi-nord/backend/scheduler": ["libs/backend/scheduler/src/index.ts"],
+      "@credi-nord/backend/weather": ["libs/backend/weather/src/index.ts"],
+      "@credi-nord/common/model": ["libs/common/model/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

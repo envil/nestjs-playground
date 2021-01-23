@@ -5,7 +5,7 @@
       "projectType": "application",
       "root": "apps/weather-alert",
       "sourceRoot": "apps/weather-alert/src",
-      "prefix": "credi-nord",
+      "prefix": "cn",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -120,7 +120,7 @@
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
       "projectType": "application",
-      "prefix": "api",
+      "prefix": "cn",
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
@@ -176,6 +176,48 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+          }
+        }
+      }
+    },
+    "backend-weather": {
+      "root": "libs/backend/weather",
+      "sourceRoot": "libs/backend/weather/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/backend/weather/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/weather"],
+          "options": {
+            "jestConfig": "libs/backend/weather/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "common-model": {
+      "root": "libs/common/model",
+      "sourceRoot": "libs/common/model/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/common/model/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/common/model"],
+          "options": {
+            "jestConfig": "libs/common/model/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
