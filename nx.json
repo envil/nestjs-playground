@@ -22,8 +22,6 @@
       "implicitDependencies": ["weather-alert"]
     },
     "api": { "tags": [] },
-    "api-interfaces": { "tags": [] },
-    "backend-scheduler": { "tags": [] },
     "backend-weather": { "tags": [] },
     "common-model": { "tags": [] }
   }
