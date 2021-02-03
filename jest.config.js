@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/backend/scheduler',
     '<rootDir>/libs/backend/weather',
     '<rootDir>/libs/common/model',
+    '<rootDir>/libs/backend/database',
   ],
 };

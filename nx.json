@@ -23,6 +23,7 @@
     },
     "api": { "tags": [] },
     "backend-weather": { "tags": [] },
-    "common-model": { "tags": [] }
+    "common-model": { "tags": [] },
+    "backend-database": { "tags": [] }
   }
 }

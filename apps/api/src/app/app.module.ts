@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 
 import { ScheduleModule } from '@nestjs/schedule';
 import { BackendWeatherModule } from '@credi-nord/backend/weather';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configurations } from '../environments/environment';
+import { BackendDatabaseModule } from '@credi-nord/backend/database';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { configurations } from '../environments/environment';
     ConfigModule.forRoot({
       load: [configurations],
     }),
+    BackendDatabaseModule.forRoot(),
     BackendWeatherModule,
   ],
   controllers: [],
