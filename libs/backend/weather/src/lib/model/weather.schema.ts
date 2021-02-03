@@ -9,8 +9,8 @@ export type WeatherForecastDocument = WeatherForecast & Document;
 
 @Schema()
 export class WeatherForecast {
-  @Prop() city?: string;
-  @Prop({ index: true }) timestamp: number;
+  @Prop() city: string;
+  @Prop() timestamp: number;
   @Prop() temperature: number;
 
   static openWeatherForecastModelAdapter(model: OpenWeatherForecastModel, city: string): WeatherForecast {
