@@ -2,13 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { ConfigService } from '@nestjs/config';
 import { OpenWeatherMapService } from '../services/open-weather-map.service';
-import { filter, take, map as rxMap } from 'rxjs/operators';
+import { take, map as rxMap } from 'rxjs/operators';
 import { CronCommand, CronJob } from 'cron';
 import { WeatherAlertService } from '../services/weather-alert.service';
 import getUnixTime from 'date-fns/getUnixTime';
 import { forkJoin, Observable } from 'rxjs';
-import map from 'lodash/map';
-import compact from 'lodash/compact';
+import { map, compact } from 'lodash';
 
 @Injectable()
 export class WeatherCron {
@@ -41,14 +40,10 @@ export class WeatherCron {
           warning: 'low',
           cities: compact(alertingCities)
         }).then(
-          () => {
-            this.logger.log('weather warning saved');
-          },
-          (error) => {
-            this.logger.error('cannot save weather warning', error);
-          }
+          () => this.logger.log('weather warning saved'),
+          (error) => this.logger.error('cannot save weather warning', error)
         );
-      });
+      }, error => this.logger.error('failed to retrieve cities weather data', error));
     };
   }
 

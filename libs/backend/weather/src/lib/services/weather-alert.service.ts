@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { WeatherAlert, WeatherAlertDocument } from '../model/weather.schema';
-import first from 'lodash/first';
-import find from 'lodash/find';
-import isEmpty from 'lodash/isEmpty';
+import { first, find, isEmpty } from 'lodash';
 import { WeatherForecastDTO } from '../model/weather.dto';
 
 @Injectable()

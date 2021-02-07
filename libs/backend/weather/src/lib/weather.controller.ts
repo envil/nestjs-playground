@@ -3,7 +3,7 @@ import { WeatherAlertService } from './services/weather-alert.service';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WeatherAlert } from './model/weather.schema';
-import pick from 'lodash/pick';
+import { pick } from 'lodash';
 
 @Controller('weather')
 export class WeatherController {
