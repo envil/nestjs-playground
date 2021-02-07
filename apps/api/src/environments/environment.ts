@@ -6,6 +6,8 @@ export const environment = {
 export const configurations = () => ({
   cities: [
     'Helsinki,FI',
+    'London,GB',
+    'Hanoi,VN',
   ],
   lowerThreshold: 283,
   openweathermap: {
