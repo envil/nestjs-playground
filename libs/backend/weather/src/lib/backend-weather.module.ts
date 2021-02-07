@@ -4,20 +4,20 @@ import { OpenWeatherMapService } from './services/open-weather-map.service';
 import { WeatherController } from './weather.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { WeatherForecast, WeatherForecastSchema } from './model/weather.schema';
-import { WeatherForecastService } from './services/weather-forecast.service';
+import { WeatherAlert, WeatherAlertSchema } from './model/weather.schema';
+import { WeatherAlertService } from './services/weather-alert.service';
 
 @Module({
   imports: [
     HttpModule,
     ConfigModule,
-    MongooseModule.forFeature([{ name: WeatherForecast.name, schema: WeatherForecastSchema }])
+    MongooseModule.forFeature([{ name: WeatherAlert.name, schema: WeatherAlertSchema }])
   ],
   controllers: [WeatherController],
   providers: [
     WeatherCron,
     OpenWeatherMapService,
-    WeatherForecastService
+    WeatherAlertService
   ],
   exports: []
 })

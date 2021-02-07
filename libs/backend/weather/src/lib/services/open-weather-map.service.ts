@@ -5,7 +5,7 @@ import { OpenWeatherResponseModel } from '../model/open-weather.model';
 import { map } from 'rxjs/operators';
 import get from 'lodash/get';
 import { ConfigService } from '@nestjs/config';
-import { WeatherForecast } from '../model/weather.schema';
+import { WeatherForecastDTO } from '../model/weather.dto';
 
 
 export abstract class IWeatherService {
@@ -20,11 +20,10 @@ export class OpenWeatherMapService implements IWeatherService {
     this.appId = this.configService.get('openweathermap.appId');
   }
 
-  getForecast(city: string): Observable<WeatherForecast[]> {
+  getForecast(city: string): Observable<WeatherForecastDTO[]> {
     return this.httpService.get<AxiosResponse<OpenWeatherResponseModel>>(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${this.appId}`).pipe(
       map((response) => get(response, 'data')),
-      map(response => WeatherForecast.openWeatherResponseModelAdapter(response, city)),
+      map((result: OpenWeatherResponseModel) => OpenWeatherResponseModel.convertToWeatherForecastDTOs(result)),
     );
   }
-
 }

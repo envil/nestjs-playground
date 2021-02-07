@@ -1,12 +1,28 @@
+import { WeatherForecastDTO } from './weather.dto';
+import map from 'lodash/map';
+
 export class OpenWeatherResponseModel {
   cod: string;
   message: number;
   list: OpenWeatherForecastModel[];
+
+
+  static convertToWeatherForecastDTOs(model: OpenWeatherResponseModel): WeatherForecastDTO[] {
+    return map(model.list, OpenWeatherForecastModel.convertToWeatherForecastDTO);
+  }
+
 }
 
 export class OpenWeatherForecastModel {
   dt: number;
   main: OpenWeatherMainForecastModel;
+
+  static convertToWeatherForecastDTO(model: OpenWeatherForecastModel): WeatherForecastDTO {
+    return {
+      timestamp: model?.dt,
+      temperature: model?.main?.temp,
+    };
+  }
 }
 
 export class OpenWeatherMainForecastModel {

@@ -1,29 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { OpenWeatherForecastModel, OpenWeatherResponseModel } from './open-weather.model';
-import map from 'lodash/map';
-import get from 'lodash/get';
 
-
-export type WeatherForecastDocument = WeatherForecast & Document;
+export type WeatherAlertDocument = WeatherAlert & Document;
 
 @Schema()
-export class WeatherForecast {
-  @Prop() city: string;
+export class WeatherAlert {
   @Prop() timestamp: number;
-  @Prop() temperature: number;
-
-  static openWeatherForecastModelAdapter(model: OpenWeatherForecastModel, city: string): WeatherForecast {
-    return {
-      city,
-      timestamp: model?.dt,
-      temperature: model?.main?.temp
-    };
-  }
-
-  static openWeatherResponseModelAdapter(responseModel: OpenWeatherResponseModel, city: string): WeatherForecast[] {
-    return map(get(responseModel, 'list'), (item) => WeatherForecast.openWeatherForecastModelAdapter(item, city));
-  }
+  @Prop() warning: string;
+  @Prop([String]) cities: string[];
 }
 
-export const WeatherForecastSchema = SchemaFactory.createForClass(WeatherForecast);
+export const WeatherAlertSchema = SchemaFactory.createForClass(WeatherAlert);
+

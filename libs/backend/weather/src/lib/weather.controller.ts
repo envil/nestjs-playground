@@ -1,13 +1,19 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { OpenWeatherMapService } from './services/open-weather-map.service';
+import { Controller, Get} from '@nestjs/common';
+import { WeatherAlertService } from './services/weather-alert.service';
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { WeatherAlert } from './model/weather.schema';
+import pick from 'lodash/pick';
 
 @Controller('weather')
 export class WeatherController {
-  constructor(private weatherService: OpenWeatherMapService) {
+  constructor(private weatherAlertService: WeatherAlertService) {
   }
 
-  @Get('5-day-forecast/:city')
-  get5DayForecast(@Param('city') city: string) {
-    return city;
+  @Get('cold-alert')
+  getColdAlert() {
+    return from(this.weatherAlertService.getLastAlert()).pipe(
+      map((alert: WeatherAlert) => pick(alert, ['cities', 'warning']))
+    );
   }
 }
