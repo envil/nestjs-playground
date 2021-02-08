@@ -21,9 +21,11 @@
       "tags": [],
       "implicitDependencies": ["weather-alert"]
     },
-    "api": { "tags": [] },
+    "api": {
+      "tags": [],
+      "implicitDependencies": ["backend-weather"]
+    },
     "backend-weather": { "tags": [] },
-    "common-model": { "tags": [] },
     "backend-database": { "tags": [] }
   }
 }

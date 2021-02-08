@@ -59,13 +59,6 @@ describe('OpenWeatherMapService', () => {
   });
 
   it('should throw NetworkError', function() {
-    const response: AxiosResponse<OpenWeatherResponseModel> = {
-      data: null,
-      headers: {},
-      config: {},
-      status: 400,
-      statusText: 'ERROR'
-    };
     openWeatherMapService.getForecast('Some city').subscribe(() => {
       return;
     }, (error: Error) => {

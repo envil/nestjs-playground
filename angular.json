@@ -188,27 +188,6 @@
         }
       }
     },
-    "common-model": {
-      "root": "libs/common/model",
-      "sourceRoot": "libs/common/model/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/common/model/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/common/model"],
-          "options": {
-            "jestConfig": "libs/common/model/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "backend-database": {
       "root": "libs/backend/database",
       "sourceRoot": "libs/backend/database/src",

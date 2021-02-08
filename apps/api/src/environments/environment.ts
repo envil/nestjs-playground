@@ -18,7 +18,7 @@ export const configurations = () => ({
   },
   cronJobs: {
     weatherForecast: {
-      pattern: CronExpression.EVERY_10_SECONDS,
+      pattern: CronExpression.EVERY_30_SECONDS,
     }
   }
 });
