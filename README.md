@@ -12,8 +12,12 @@ npm install # for intellisense and testing
 docker-compose up
 ```
 The watcher will watch and build the code automatically when it sees changes.
-
+## Configurations
 Go to `apps/api/src/environments/environment.ts` to change app configurations.
+
+- `cities`: List of the cities to check.
+- `lowerThreshold`: the lower limit threshold of the temperature.
+- `cronJobs.weatherForecast.pattern`: The cron pattern. Either a valid cron pattern string or a `CronExpression` constants provided by Nestjs are acceptable.
 # Testing
  ```
 nx test <PROJECT-NAME>

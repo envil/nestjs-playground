@@ -6,11 +6,18 @@ import { WeatherAlertService } from './weather-alert.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/common';
 import { WeatherAlert, WeatherAlertSchema } from '../model/weather.schema';
+import { WeatherForecastDTO } from '../model/weather.dto';
 
 describe('WeatherAlertService', () => {
   let app: TestingModule;
   let mongod: MongoMemoryServer;
   let weatherAlertService: WeatherAlertService;
+  const weatherForecasts: WeatherForecastDTO[] = [
+    { timestamp: 1000, temperature: 270 },
+    { timestamp: 1000, temperature: 275 },
+    { timestamp: 1000, temperature: 280 },
+    { timestamp: 1000, temperature: 260 },
+  ];
 
   afterEach(async () => {
     await app.close();
@@ -64,5 +71,17 @@ describe('WeatherAlertService', () => {
       expect(result).toBeTruthy();
       expect(result.timestamp).toBe(1000);
     });
+  });
+
+  it('should check if temperature below threshold and return yes', function() {
+    expect(weatherAlertService.isTemperatureBelowThreshold(weatherForecasts, 273)).toBeTruthy();
+  });
+
+  it('should check if temperature below threshold and return no', function() {
+    expect(weatherAlertService.isTemperatureBelowThreshold(weatherForecasts, 250)).toBeFalsy();
+  });
+
+  it('should check if temperature below threshold of an empty array and return no', function() {
+    expect(weatherAlertService.isTemperatureBelowThreshold(null, 290)).toBeFalsy();
   });
 });
