@@ -1,6 +1,6 @@
 import { HttpService, Injectable, Logger } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios';
 import { OpenWeatherResponseModel } from '../model/open-weather.model';
 import { catchError, map } from 'rxjs/operators';
 import { get } from 'lodash';
