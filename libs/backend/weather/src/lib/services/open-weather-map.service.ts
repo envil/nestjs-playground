@@ -8,12 +8,12 @@ import { ConfigService } from '@nestjs/config';
 import { WeatherForecastDTO } from '../model/weather.dto';
 
 
-export abstract class IWeatherService {
-  public abstract getForecast(city: string)
+export interface WeatherService {
+  getForecast(city: string);
 }
 
 @Injectable()
-export class OpenWeatherMapService implements IWeatherService {
+export class OpenWeatherMapService implements WeatherService {
   private readonly logger = new Logger(OpenWeatherMapService.name);
 
   appId: string
