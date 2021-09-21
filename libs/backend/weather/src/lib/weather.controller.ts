@@ -1,4 +1,4 @@
-import { Controller, Get} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { WeatherAlertService } from './services/weather-alert.service';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
